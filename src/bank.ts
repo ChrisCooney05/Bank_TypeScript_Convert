@@ -9,21 +9,21 @@ class Bank {
     this.#history = new History();
   }
   //#currentBalance would be preferred but as of yet there is no support in TS for private methods
-  #currentBalance(): number {
+  _currentBalance(): number {
     return this.#balance;
   }
 
   deposit(funds: number): void {
     this.#balance += funds;
-    let date = this.#getDate();
-    let balance = this.#currentBalance();
+    let date = this._getDate();
+    let balance = this._currentBalance();
     this.#history.deposit(date, funds, balance);
   }
 
   withdraw(funds: number): void {
     this.#balance -= funds;
-    let date = this.#getDate();
-    let balance = this.#currentBalance();
+    let date = this._getDate();
+    let balance = this._currentBalance();
     this.#history.withdraw(date, funds, balance);
   }
 
@@ -31,7 +31,7 @@ class Bank {
     this.#history.logStatement();
   }
 
-  #getDate(): string {
+  _getDate(): string {
     let t = new Date();
     let dd = t.getDate();
     let mm = t.getMonth() + 1;
